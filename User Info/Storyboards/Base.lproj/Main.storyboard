@@ -72,31 +72,31 @@
                                                         <constraint firstAttribute="width" constant="192" id="YKl-qt-7t2"/>
                                                     </constraints>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="rYG-2L-yLn">
-                                                    <rect key="frame" x="128.5" y="97" width="157" height="20.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="rYG-2L-yLn">
+                                                    <rect key="frame" x="122" y="97" width="164" height="25"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6V-sW-lHg">
-                                                            <rect key="frame" x="0.0" y="0.0" width="46.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6V-sW-lHg">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="21W-eG-3dV"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPP-Cb-1MP">
-                                                            <rect key="frame" x="110.5" y="0.0" width="46.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPP-Cb-1MP">
+                                                            <rect key="frame" x="114" y="0.0" width="50" height="25"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="157" id="dxW-9E-G8l"/>
-                                                        <constraint firstAttribute="height" constant="20.5" id="jY7-lx-VP1"/>
-                                                    </constraints>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Bj-7V-mv2">
-                                                    <rect key="frame" x="305.5" y="100" width="88.5" height="21"/>
+                                                    <rect key="frame" x="311" y="100" width="83" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="bL9-hb-BD6"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="83" id="AyI-Pb-PEe"/>
+                                                        <constraint firstAttribute="height" constant="21" id="fq3-Uc-sE4"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -104,18 +104,17 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="3Bj-7V-mv2" firstAttribute="leading" secondItem="rYG-2L-yLn" secondAttribute="trailing" constant="25" id="29h-C1-l9e"/>
                                                 <constraint firstItem="ctB-wm-bzF" firstAttribute="top" secondItem="MxN-wI-NyI" secondAttribute="bottom" constant="8" id="4xh-rX-gYE"/>
                                                 <constraint firstItem="MxN-wI-NyI" firstAttribute="leading" secondItem="Kgc-l4-yfU" secondAttribute="trailing" constant="8" symbolic="YES" id="60n-jz-cls"/>
                                                 <constraint firstItem="MxN-wI-NyI" firstAttribute="top" secondItem="gfJ-Dd-fto" secondAttribute="topMargin" id="GUM-nG-xZv"/>
                                                 <constraint firstItem="Kgc-l4-yfU" firstAttribute="centerY" secondItem="gfJ-Dd-fto" secondAttribute="centerY" id="WPP-fe-RFc"/>
+                                                <constraint firstItem="3Bj-7V-mv2" firstAttribute="trailing" secondItem="gfJ-Dd-fto" secondAttribute="trailingMargin" id="aOa-w1-bge"/>
                                                 <constraint firstItem="Kgc-l4-yfU" firstAttribute="leading" secondItem="gfJ-Dd-fto" secondAttribute="leading" constant="10" id="cDd-M4-tAN"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="rYG-2L-yLn" secondAttribute="bottom" constant="3.5" id="dpi-T2-mQr"/>
-                                                <constraint firstItem="3Bj-7V-mv2" firstAttribute="bottom" secondItem="gfJ-Dd-fto" secondAttribute="bottomMargin" id="eML-wF-B2w"/>
+                                                <constraint firstItem="3Bj-7V-mv2" firstAttribute="bottom" secondItem="gfJ-Dd-fto" secondAttribute="bottomMargin" id="f3u-h4-SpJ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="MxN-wI-NyI" secondAttribute="trailing" constant="8" id="gHo-8n-d6a"/>
-                                                <constraint firstItem="3Bj-7V-mv2" firstAttribute="leading" secondItem="rYG-2L-yLn" secondAttribute="trailing" constant="20" id="mcR-YQ-vEC"/>
-                                                <constraint firstItem="3Bj-7V-mv2" firstAttribute="trailing" secondItem="gfJ-Dd-fto" secondAttribute="trailingMargin" id="o9z-Pb-vH2"/>
-                                                <constraint firstItem="rYG-2L-yLn" firstAttribute="centerX" secondItem="gfJ-Dd-fto" secondAttribute="centerX" id="oCV-oJ-yon"/>
                                                 <constraint firstItem="ctB-wm-bzF" firstAttribute="centerX" secondItem="gfJ-Dd-fto" secondAttribute="centerX" id="xPo-OG-QoJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="rYG-2L-yLn" secondAttribute="bottom" constant="10" id="zZe-I3-dZy"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
