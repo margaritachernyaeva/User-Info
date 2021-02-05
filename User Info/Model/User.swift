@@ -14,6 +14,9 @@ struct User: Codable {
     let followers : Int?
     let following : Int?
     let created_at : String?
+    let company: String?
+    let location: String?
+    let public_repos: Int?
 }
 
 

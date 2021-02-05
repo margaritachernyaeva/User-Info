@@ -19,14 +19,11 @@ class ViewController: UIViewController {
         getData(from: margaritasURL)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        print(users.count)
-    }
-    
    private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
     private func getData(from url: String) {
         URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
             if let error = error {
@@ -47,7 +44,19 @@ class ViewController: UIViewController {
             }
         }.resume()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            guard let detailVC = segue.destination as? DetailTableViewController else { return }
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let user = users[indexPath.row]
+            detailVC.userInfo = user
+        }
+    }
 }
+    
+
+//MARK: - TableViewDelegate & DataSource
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

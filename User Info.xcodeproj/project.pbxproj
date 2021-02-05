@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		526F6A8B25CDA64900B6D6D3 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F6A8A25CDA64900B6D6D3 /* DetailTableViewController.swift */; };
 		5281BCF825CC7F8700F65061 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5281BCF725CC7F8700F65061 /* AppDelegate.swift */; };
 		5281BCFA25CC7F8700F65061 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5281BCF925CC7F8700F65061 /* SceneDelegate.swift */; };
 		5281BCFC25CC7F8700F65061 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5281BCFB25CC7F8700F65061 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		526F6A8A25CDA64900B6D6D3 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		5281BCF425CC7F8700F65061 /* User Info.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "User Info.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5281BCF725CC7F8700F65061 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5281BCF925CC7F8700F65061 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				5281BCFB25CC7F8700F65061 /* ViewController.swift */,
 				5281BD1625CC86F400F65061 /* CustomTableViewCell.swift */,
+				526F6A8A25CDA64900B6D6D3 /* DetailTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				526F6A8B25CDA64900B6D6D3 /* DetailTableViewController.swift in Sources */,
 				5281BD1A25CC994100F65061 /* User.swift in Sources */,
 				5281BD0225CC7F8700F65061 /* User_Info.xcdatamodeld in Sources */,
 				5281BD1725CC86F400F65061 /* CustomTableViewCell.swift in Sources */,
