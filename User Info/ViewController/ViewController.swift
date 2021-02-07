@@ -53,6 +53,7 @@ class ViewController: UIViewController {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
             let user = users[indexPath.row]
             detailVC.userInfo = user
+            detailVC.avatarImageView.image = 
         }
     }
 }
@@ -96,6 +97,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.avatar.image = image
             }
         }
+        cell.avatar.layer.cornerRadius = cell.avatar.frame.width / 2
+        cell.avatar.clipsToBounds = true
         return cell
     }
     

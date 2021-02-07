@@ -19,4 +19,13 @@ struct User: Codable {
     let public_repos: Int?
 }
 
+extension User {
+    var imageData: Data? {
+        guard let stringURL = avatar_url else { return nil }
+        if let url = URL(string: stringURL) {
+            return try? Data(contentsOf: url)
+        }
+    }
+}
+
 
