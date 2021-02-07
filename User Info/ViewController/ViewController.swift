@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         getData(from: margaritasURL)
+//        downloadAvatars()
     }
     
    private func setupTableView() {
@@ -25,12 +26,13 @@ class ViewController: UIViewController {
     }
     
     private func getData(from url: String) {
-        URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
+        
+        URLSession.shared.dataTask(with: URL(string: url)!) { (data, _, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
-            guard let data = data, let _ = response else { return }
+            guard let data = data else { return }
             var result: User?
             do {
                 result = try JSONDecoder().decode(User.self, from: data)
@@ -64,6 +66,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print(users.count)
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
         let user = users[indexPath.row]
         // " " чтобы ничего не плыло, если значение nil
@@ -81,6 +84,18 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         // тут приводим дату к читаемому виду
         cell.dateLabel.text = String((user.created_at ?? "").dropLast(10))
+        // загружаем аватары
+        DispatchQueue.global(qos: .background).async {
+            guard let stringURL = user.avatar_url else { return }
+            guard let url = URL(string: stringURL) else { return }
+            let data = try? Data(contentsOf: url)
+            let image: UIImage?
+            guard let imageData = data else { return }
+            image = UIImage(data: imageData)
+            DispatchQueue.main.async {
+                    cell.avatar.image = image
+            }
+        }
         return cell
     }
     
