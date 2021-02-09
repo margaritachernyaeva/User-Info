@@ -7,44 +7,26 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
+    private var presenter: MainPresenter?
+    private var networkManager: NetworkManager!
     var users = [User]()
-    var margaritasURL = "https://api.github.com/users/margaritachernyaeva"
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        getData(from: margaritasURL)
-//        downloadAvatars()
     }
     
    private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
-    private func getData(from url: String) {
-        
-        URLSession.shared.dataTask(with: URL(string: url)!) { (data, _, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            guard let data = data else { return }
-            var result: User?
-            do {
-                result = try JSONDecoder().decode(User.self, from: data)
-            } catch {
-                print(error.localizedDescription)
-            }
-            guard let json = result else { return }
-            self.users.append(json)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }.resume()
+
+    private func initialize() {
+        networkManager = NetworkManager()
+        presenter = MainPresenter(view: self, networkManager: networkManager)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,7 +35,6 @@ class ViewController: UIViewController {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
             let user = users[indexPath.row]
             detailVC.userInfo = user
-            detailVC.avatarImageView.image = 
         }
     }
 }
@@ -61,7 +42,7 @@ class ViewController: UIViewController {
 
 //MARK: - TableViewDelegate & DataSource
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
@@ -72,7 +53,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let user = users[indexPath.row]
         // " " чтобы ничего не плыло, если значение nil
         cell.nameLabel.text = user.name ?? " "
-        cell.emailLabel.text = user.email ?? " "
+        cell.emailLabel.text = "email: \(user.email ?? " ")"
         if let followers = user.followers {
             cell.followersLabel.text = String(followers)
         } else {
@@ -97,6 +78,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.avatar.image = image
             }
         }
+        if cell.avatar.image == nil {
+            cell.avatar.image = #imageLiteral(resourceName: "default_photo")
+        }
         cell.avatar.layer.cornerRadius = cell.avatar.frame.width / 2
         cell.avatar.clipsToBounds = true
         return cell
@@ -106,4 +90,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return 132
     }
 }
+
+extension MainViewController: MainViewProtocol {
+    
+}
+
+
 

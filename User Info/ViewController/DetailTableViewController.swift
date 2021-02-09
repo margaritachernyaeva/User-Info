@@ -37,6 +37,13 @@ class DetailTableViewController: UITableViewController {
         publicRepositoriesCountLabel.text = userInfo.public_repos == nil ? " " : String(userInfo.public_repos ?? 0)
         let date = String((userInfo.created_at ?? "").dropLast(10))
         dateOfCreation.text = "Account was created \(date)"
+        if let imageData = userInfo.imageData {
+            avatarImageView.image = UIImage(data: imageData)
+        } else {
+            avatarImageView.image = #imageLiteral(resourceName: "default_photo")
+        }
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
+        avatarImageView.clipsToBounds = true
     }
 
     // MARK: - Table view data source

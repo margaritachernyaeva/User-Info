@@ -25,7 +25,12 @@ extension User {
         if let url = URL(string: stringURL) {
             return try? Data(contentsOf: url)
         }
+        return nil
     }
+}
+
+struct UserURL: Codable {
+    let url: String?
 }
 
 
