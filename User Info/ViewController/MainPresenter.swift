@@ -30,8 +30,8 @@ class MainPresenter: MainViewPresenterProtocol {
     }
     
     func getURL() {
-        networkManager?.getURL(completion: { (usersURL, error) in
-            print(usersURL ?? "DFRG")
-        })
+//        networkManager?.getURL(completion: { (usersURL, error) in
+//            print(usersURL ?? "DFRG")
+//        })
     }
 }

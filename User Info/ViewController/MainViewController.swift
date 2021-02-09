@@ -12,11 +12,21 @@ class MainViewController: UIViewController {
     private var presenter: MainPresenter?
     private var networkManager: NetworkManager!
     var users = [User]()
+    var userURL = [UserURL]()
     @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        initialize()
+        networkManager.getURL { (result) in
+            switch result {
+            case .success(let userURL):
+                print(userURL)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
    private func setupTableView() {

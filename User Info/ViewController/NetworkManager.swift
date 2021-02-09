@@ -10,17 +10,16 @@ import Foundation
 class NetworkManager {
     
     var url = "https://api.github.com/users"
-    var urlArray = [UserURL]()
     let alertManager = AlertManager()
     
-    func getURL(completion: @escaping ([UserURL]?, Error?) ->()) {
+    func getURL(completion: @escaping (Result<[UserURL], Error>) ->()) {
         print("DERVV")
 
         guard let url = URL(string: url) else { return }
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
                 print(error.localizedDescription)
-                completion(nil, error)
+                completion(.failure(error))
                 self.alertManager.showAlert(withTitle: "Error", message: error.localizedDescription)
                 return
             }
@@ -30,10 +29,10 @@ class NetworkManager {
                 result = try JSONDecoder().decode([UserURL].self, from: data)
             } catch {
                 print(error.localizedDescription)
+                completion(.failure(error))
             }
             guard let json = result else { return }
-            completion(json, nil)
-            self.urlArray = json
+            completion(.success(json))
         }.resume()
     }
 }

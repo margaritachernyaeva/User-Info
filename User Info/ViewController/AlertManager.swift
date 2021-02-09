@@ -22,5 +22,4 @@ class AlertManager {
         window.makeKeyAndVisible()
         window.rootViewController?.present(alert, animated: true)
     }
-    
 }
