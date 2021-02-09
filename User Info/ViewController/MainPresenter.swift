@@ -12,7 +12,7 @@ protocol MainViewProtocol: AnyObject {
 }
 
 protocol MainViewPresenterProtocol {
-    init(view: MainViewProtocol, networkManager: NetworkManager)
+    init(view: MainViewProtocol, networkManager: NetworkManager, alertManager: AlertManager)
     var usersURL: [UserURL]? { get set }
     func getURL()
 }
@@ -20,18 +20,27 @@ protocol MainViewPresenterProtocol {
 class MainPresenter: MainViewPresenterProtocol {
     
     private var view: MainViewProtocol
-    private var networkManager: NetworkManager?
+    private var networkManager: NetworkManager
+    private var alertManager: AlertManager
     var usersURL: [UserURL]?
     
-    required init(view: MainViewProtocol, networkManager: NetworkManager) {
+    required init(view: MainViewProtocol, networkManager: NetworkManager, alertManager: AlertManager) {
         self.view = view
         self.networkManager = networkManager
+        self.alertManager = alertManager
         getURL()
     }
     
     func getURL() {
-//        networkManager?.getURL(completion: { (usersURL, error) in
-//            print(usersURL ?? "DFRG")
-//        })
+        networkManager.getURL(completion: { (result) in
+            switch result {
+            case .failure(let error):
+                self.alertManager.showAlert(withTitle: "Error", message: error.localizedDescription)
+                print(error.localizedDescription)
+            case .success(let usersURL):
+                self.usersURL = usersURL
+                print(usersURL)
+            }
+        })
     }
 }

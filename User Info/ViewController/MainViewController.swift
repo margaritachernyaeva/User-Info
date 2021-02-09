@@ -11,6 +11,7 @@ class MainViewController: UIViewController {
 
     private var presenter: MainPresenter?
     private var networkManager: NetworkManager!
+    private var alertManager: AlertManager!
     var users = [User]()
     var userURL = [UserURL]()
     @IBOutlet private weak var tableView: UITableView!
@@ -19,14 +20,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         initialize()
-        networkManager.getURL { (result) in
-            switch result {
-            case .success(let userURL):
-                print(userURL)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        getURL()
     }
     
    private func setupTableView() {
@@ -36,7 +30,12 @@ class MainViewController: UIViewController {
 
     private func initialize() {
         networkManager = NetworkManager()
-        presenter = MainPresenter(view: self, networkManager: networkManager)
+        alertManager = AlertManager()
+        presenter = MainPresenter(view: self, networkManager: networkManager, alertManager: alertManager)
+    }
+    
+    private func getURL() {
+        presenter?.getURL()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
