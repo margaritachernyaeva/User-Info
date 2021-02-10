@@ -13,7 +13,7 @@ protocol MainViewProtocol: AnyObject {
 }
 
 protocol MainViewPresenterProtocol {
-    init(view: MainViewProtocol, networkManager: NetworkManager, alertManager: AlertManager)
+    init(view: MainViewProtocol, networkManager: NetworkManager)
     var usersURL: [UserURL]? { get set }
     var user: User? { get set }
     func getURL()
@@ -23,14 +23,13 @@ class MainPresenter: MainViewPresenterProtocol {
     
     private var view: MainViewProtocol
     private var networkManager: NetworkManager
-    private var alertManager: AlertManager
     var usersURL: [UserURL]?
     var user: User?
+    var users: [User]?
     
-    required init(view: MainViewProtocol, networkManager: NetworkManager, alertManager: AlertManager) {
+    required init(view: MainViewProtocol, networkManager: NetworkManager) {
         self.view = view
         self.networkManager = networkManager
-        self.alertManager = alertManager
         getURL()
     }
     
@@ -40,7 +39,6 @@ class MainPresenter: MainViewPresenterProtocol {
                 guard let self = self else { return }
                 switch result {
                 case .failure(let error):
-                    self.alertManager.showAlert(withTitle: "Error", message: error.localizedDescription)
                     self.view.failure(error: error)
                     print(error.localizedDescription)
                 case .success(let usersURL):
@@ -57,12 +55,11 @@ class MainPresenter: MainViewPresenterProtocol {
                 guard let self = self else { return }
                 switch result {
                 case .failure(let error):
-                    self.alertManager.showAlert(withTitle: "Error", message: error.localizedDescription)
                     self.view.failure(error: error)
                     print(error.localizedDescription)
                 case .success(let user):
                     self.user = user
-                    self.view.success()
+                    self.users?.append(user)
                 }
             }
         }

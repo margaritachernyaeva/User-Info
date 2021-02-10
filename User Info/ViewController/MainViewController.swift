@@ -11,7 +11,6 @@ class MainViewController: UIViewController {
 
     private var presenter: MainPresenter?
     private var networkManager: NetworkManager!
-    private var alertManager: AlertManager!
     var user: User?
     var userURL = [UserURL]()
     @IBOutlet private weak var tableView: UITableView!
@@ -30,13 +29,11 @@ class MainViewController: UIViewController {
 
     private func initialize() {
         networkManager = NetworkManager()
-        alertManager = AlertManager()
-        presenter = MainPresenter(view: self, networkManager: networkManager, alertManager: alertManager)
+        presenter = MainPresenter(view: self, networkManager: networkManager)
     }
     
     private func getURL() {
         presenter?.getURL() 
-        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -103,11 +100,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 extension MainViewController: MainViewProtocol {
     
     func failure(error: Error) {
-        alertManager.showAlert(withTitle: "Error", message: error.localizedDescription)
+       showAlert(withTitle: "Error", message: error.localizedDescription)
     }
     
     func success() {
-        tableView.reloadData()
+      tableView.reloadData()
     }
 }
 
