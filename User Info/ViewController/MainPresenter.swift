@@ -5,15 +5,17 @@
 //  Created by Маргарита Черняева on 2/8/21.
 //
 
-import Foundation
+import UIKit
 
 protocol MainViewProtocol: AnyObject {
-    
+    func success()
+    func failure(error: Error)
 }
 
 protocol MainViewPresenterProtocol {
     init(view: MainViewProtocol, networkManager: NetworkManager, alertManager: AlertManager)
     var usersURL: [UserURL]? { get set }
+    var user: User? { get set }
     func getURL()
 }
 
@@ -23,6 +25,7 @@ class MainPresenter: MainViewPresenterProtocol {
     private var networkManager: NetworkManager
     private var alertManager: AlertManager
     var usersURL: [UserURL]?
+    var user: User?
     
     required init(view: MainViewProtocol, networkManager: NetworkManager, alertManager: AlertManager) {
         self.view = view
@@ -32,15 +35,36 @@ class MainPresenter: MainViewPresenterProtocol {
     }
     
     func getURL() {
-        networkManager.getURL(completion: { (result) in
-            switch result {
-            case .failure(let error):
-                self.alertManager.showAlert(withTitle: "Error", message: error.localizedDescription)
-                print(error.localizedDescription)
-            case .success(let usersURL):
-                self.usersURL = usersURL
-                print(usersURL)
+        networkManager.getURL(completion: {  [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                switch result {
+                case .failure(let error):
+                    self.alertManager.showAlert(withTitle: "Error", message: error.localizedDescription)
+                    self.view.failure(error: error)
+                    print(error.localizedDescription)
+                case .success(let usersURL):
+                    self.usersURL = usersURL
+                    self.view.success()
+                }
             }
         })
+    }
+    
+    func getUser(userURL: String) {
+        networkManager.getUser(userURL: userURL) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                switch result {
+                case .failure(let error):
+                    self.alertManager.showAlert(withTitle: "Error", message: error.localizedDescription)
+                    self.view.failure(error: error)
+                    print(error.localizedDescription)
+                case .success(let user):
+                    self.user = user
+                    self.view.success()
+                }
+            }
+        }
     }
 }

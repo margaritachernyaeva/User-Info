@@ -51,6 +51,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		523B166A25D3F8A40018BC0A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		5281BCEB25CC7F8700F65061 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +77,7 @@
 		5281BCF625CC7F8700F65061 /* User Info */ = {
 			isa = PBXGroup;
 			children = (
+				523B166A25D3F8A40018BC0A /* Extension */,
 				5281BD1C25CC994800F65061 /* Model */,
 				5281BD1325CC7FE200F65061 /* ViewController */,
 				5281BD0F25CC7F9800F65061 /* Supporting Files */,

@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     private var presenter: MainPresenter?
     private var networkManager: NetworkManager!
     private var alertManager: AlertManager!
-    var users = [User]()
+    var user: User?
     var userURL = [UserURL]()
     @IBOutlet private weak var tableView: UITableView!
     
@@ -35,15 +35,15 @@ class MainViewController: UIViewController {
     }
     
     private func getURL() {
-        presenter?.getURL()
+        presenter?.getURL() 
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             guard let detailVC = segue.destination as? DetailTableViewController else { return }
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            let user = users[indexPath.row]
-            detailVC.userInfo = user
+            detailVC.userInfo = self.user
         }
     }
 }
@@ -53,14 +53,14 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return presenter?.usersURL?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(users.count)
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
-        let user = users[indexPath.row]
-        // " " чтобы ничего не плыло, если значение nil
+        guard let url = presenter?.usersURL?[indexPath.row].url else { return cell }
+        presenter?.getUser(userURL: url)
+        guard let user = presenter?.user else { return cell }
         cell.nameLabel.text = user.name ?? " "
         cell.emailLabel.text = "email: \(user.email ?? " ")"
         if let followers = user.followers {
@@ -102,6 +102,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController: MainViewProtocol {
     
+    func failure(error: Error) {
+        alertManager.showAlert(withTitle: "Error", message: error.localizedDescription)
+    }
+    
+    func success() {
+        tableView.reloadData()
+    }
 }
 
 
