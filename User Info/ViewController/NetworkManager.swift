@@ -5,7 +5,7 @@
 //  Created by Маргарита Черняева on 2/8/21.
 //
 
-import Foundation
+import UIKit
 
 class NetworkManager {
     
@@ -51,5 +51,13 @@ class NetworkManager {
             guard let json = result else { return }
             completion(.success(json))
         }.resume()
+    }
+    
+    func getImage(stringUrl: String, completion: @escaping (UIImage) ->()) {
+        guard let url = URL(string: stringUrl) else { return }
+        let data = try? Data(contentsOf: url)
+        guard let imageData = data else { return }
+        guard let image = UIImage(data: imageData) else { return }
+        completion(image)
     }
 }

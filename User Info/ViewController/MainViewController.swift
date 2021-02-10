@@ -40,7 +40,9 @@ class MainViewController: UIViewController {
         if segue.identifier == "showDetail" {
             guard let detailVC = segue.destination as? DetailTableViewController else { return }
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            detailVC.userInfo = self.user
+            guard let url = presenter?.usersURL?[indexPath.row].url else { return }
+            presenter?.getUser(userURL: url)
+            detailVC.userInfo = presenter?.user
         }
     }
 }
@@ -75,13 +77,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         // загружаем аватары
         DispatchQueue.global(qos: .background).async {
             guard let stringURL = user.avatar_url else { return }
-            guard let url = URL(string: stringURL) else { return }
-            let data = try? Data(contentsOf: url)
-            let image: UIImage?
-            guard let imageData = data else { return }
-            image = UIImage(data: imageData)
-            DispatchQueue.main.async {
+            self.networkManager.getImage(stringUrl: stringURL) { (image) in
+                DispatchQueue.main.async {
                     cell.avatar.image = image
+                }
             }
         }
         if cell.avatar.image == nil {
