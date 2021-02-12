@@ -25,7 +25,6 @@ class MainPresenter: MainViewPresenterProtocol {
     private var networkManager: NetworkManager
     var usersURL: [UserURL]?
     var user: User?
-    var users = [User]()
     
     required init(view: MainViewProtocol, networkManager: NetworkManager) {
         self.view = view
@@ -49,7 +48,7 @@ class MainPresenter: MainViewPresenterProtocol {
         })
     }
     
-    func getUser(userURL: String) {
+    func getUser(userURL: String, completion: @escaping (User?) -> ()) {
         networkManager.getUser(userURL: userURL) { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
@@ -58,7 +57,7 @@ class MainPresenter: MainViewPresenterProtocol {
                     self.view.failure(error: error)
                     print(error.localizedDescription)
                 case .success(let user):
-                    self.user = user
+                    completion(user)
                 }
             }
         }

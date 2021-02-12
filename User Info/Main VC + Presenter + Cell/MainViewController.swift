@@ -42,8 +42,9 @@ class MainViewController: UIViewController {
             guard let detailVC = segue.destination as? DetailTableViewController else { return }
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
             guard let url = presenter?.usersURL?[indexPath.row].url else { return }
-            presenter?.getUser(userURL: url)
-            detailVC.userInfo = presenter?.user
+            presenter?.getUser(userURL: url) { userInfo in
+                detailVC.userInfo = userInfo
+            }
         }
     }
 }

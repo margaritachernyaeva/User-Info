@@ -53,13 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5205BF4D25D458E6001B1ADA /* Main VC + Presenter */ = {
+		5205BF4D25D458E6001B1ADA /* Main VC + Presenter + Cell */ = {
 			isa = PBXGroup;
 			children = (
 				527FBBEA25D1ADC50062F775 /* MainPresenter.swift */,
 				5281BCFB25CC7F8700F65061 /* MainViewController.swift */,
+				5281BD1625CC86F400F65061 /* MainTableViewCell.swift */,
 			);
-			path = "Main VC + Presenter";
+			path = "Main VC + Presenter + Cell";
 			sourceTree = "<group>";
 		};
 		5205BF5125D45906001B1ADA /* network */ = {
@@ -77,14 +78,6 @@
 				5205BF4A25D448BA001B1ADA /* DetailPresenter.swift */,
 			);
 			path = "DetailVC + Presenter";
-			sourceTree = "<group>";
-		};
-		5205BF5625D4593A001B1ADA /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				5281BD1625CC86F400F65061 /* MainTableViewCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		523B166A25D3F8A40018BC0A /* Extension */ = {
@@ -116,9 +109,8 @@
 			children = (
 				5281BD1C25CC994800F65061 /* Model */,
 				5281BD0F25CC7F9800F65061 /* Supporting Files */,
-				5205BF4D25D458E6001B1ADA /* Main VC + Presenter */,
+				5205BF4D25D458E6001B1ADA /* Main VC + Presenter + Cell */,
 				5205BF5425D45924001B1ADA /* DetailVC + Presenter */,
-				5205BF5625D4593A001B1ADA /* Cell */,
 				5205BF5125D45906001B1ADA /* network */,
 				523B166A25D3F8A40018BC0A /* Extension */,
 				5281BD1225CC7FD500F65061 /* Storyboards */,
