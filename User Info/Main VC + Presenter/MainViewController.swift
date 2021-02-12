@@ -13,6 +13,7 @@ class MainViewController: UIViewController {
     private var networkManager: NetworkManager!
     var user: User?
     var userURL = [UserURL]()
+    var users: [User]?
     @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -46,48 +47,22 @@ class MainViewController: UIViewController {
         }
     }
 }
-    
 
 //MARK: - TableViewDelegate & DataSource
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter?.usersURL?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
-        guard let url = presenter?.usersURL?[indexPath.row].url else { return cell }
-        presenter?.getUser(userURL: url)
-        guard let user = presenter?.user else { return cell }
-        cell.nameLabel.text = user.name ?? " "
-        cell.emailLabel.text = "email: \(user.email ?? " ")"
-        if let followers = user.followers {
-            cell.followersLabel.text = String(followers)
-        } else {
-            cell.followersLabel.text = " "
-        }
-        if let following = user.following {
-            cell.followingLabel.text = String(following)
-        } else {
-            cell.followingLabel.text = " "
-        }
-        // тут приводим дату к читаемому виду
-        cell.dateLabel.text = String((user.created_at ?? "").dropLast(10))
-        // загружаем аватары
-        DispatchQueue.global(qos: .background).async {
-            guard let stringURL = user.avatar_url else { return }
-            self.networkManager.getImage(stringUrl: stringURL) { (image) in
-                DispatchQueue.main.async {
-                    cell.avatar.image = image
-                }
-            }
-        }
-        if cell.avatar.image == nil {
-            cell.avatar.image = #imageLiteral(resourceName: "default_photo")
-        }
-        cell.avatar.layer.cornerRadius = cell.avatar.frame.width / 2
-        cell.avatar.clipsToBounds = true
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
+        guard let presenter = presenter else { return UITableViewCell() }
+        guard let stringURL = presenter.usersURL?[indexPath.row].url else { return cell }
+        cell.prepareForReuse()
+        cell.configure(stringURL: stringURL, presenter: presenter)
         return cell
     }
     
@@ -95,6 +70,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return 132
     }
 }
+
+//MARK: - MainViewProtocol
 
 extension MainViewController: MainViewProtocol {
     

@@ -20,6 +20,7 @@ struct User: Codable {
 }
 
 extension User {
+    // this helps to transfer image from MainVC to DetailVC
     var imageData: Data? {
         guard let stringURL = avatar_url else { return nil }
         if let url = URL(string: stringURL) {

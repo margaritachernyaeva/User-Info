@@ -19,7 +19,7 @@
 		5281BD0225CC7F8700F65061 /* User_Info.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5281BD0025CC7F8700F65061 /* User_Info.xcdatamodeld */; };
 		5281BD0425CC7F8C00F65061 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5281BD0325CC7F8C00F65061 /* Assets.xcassets */; };
 		5281BD0725CC7F8C00F65061 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5281BD0525CC7F8C00F65061 /* LaunchScreen.storyboard */; };
-		5281BD1725CC86F400F65061 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5281BD1625CC86F400F65061 /* CustomTableViewCell.swift */; };
+		5281BD1725CC86F400F65061 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5281BD1625CC86F400F65061 /* MainTableViewCell.swift */; };
 		5281BD1A25CC994100F65061 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5281BD1925CC994100F65061 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +38,7 @@
 		5281BD0325CC7F8C00F65061 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5281BD0625CC7F8C00F65061 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5281BD0825CC7F8C00F65061 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5281BD1625CC86F400F65061 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		5281BD1625CC86F400F65061 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		5281BD1925CC994100F65061 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,6 +53,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5205BF4D25D458E6001B1ADA /* Main VC + Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				527FBBEA25D1ADC50062F775 /* MainPresenter.swift */,
+				5281BCFB25CC7F8700F65061 /* MainViewController.swift */,
+			);
+			path = "Main VC + Presenter";
+			sourceTree = "<group>";
+		};
+		5205BF5125D45906001B1ADA /* network */ = {
+			isa = PBXGroup;
+			children = (
+				527FBBF025D1C7500062F775 /* NetworkManager.swift */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		5205BF5425D45924001B1ADA /* DetailVC + Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				526F6A8A25CDA64900B6D6D3 /* DetailTableViewController.swift */,
+				5205BF4A25D448BA001B1ADA /* DetailPresenter.swift */,
+			);
+			path = "DetailVC + Presenter";
+			sourceTree = "<group>";
+		};
+		5205BF5625D4593A001B1ADA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5281BD1625CC86F400F65061 /* MainTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		523B166A25D3F8A40018BC0A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,10 +114,13 @@
 		5281BCF625CC7F8700F65061 /* User Info */ = {
 			isa = PBXGroup;
 			children = (
-				523B166A25D3F8A40018BC0A /* Extension */,
 				5281BD1C25CC994800F65061 /* Model */,
-				5281BD1325CC7FE200F65061 /* ViewController */,
 				5281BD0F25CC7F9800F65061 /* Supporting Files */,
+				5205BF4D25D458E6001B1ADA /* Main VC + Presenter */,
+				5205BF5425D45924001B1ADA /* DetailVC + Presenter */,
+				5205BF5625D4593A001B1ADA /* Cell */,
+				5205BF5125D45906001B1ADA /* network */,
+				523B166A25D3F8A40018BC0A /* Extension */,
 				5281BD1225CC7FD500F65061 /* Storyboards */,
 				5281BD0825CC7F8C00F65061 /* Info.plist */,
 			);
@@ -108,19 +145,6 @@
 				5281BD0525CC7F8C00F65061 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		5281BD1325CC7FE200F65061 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				5281BCFB25CC7F8700F65061 /* MainViewController.swift */,
-				527FBBEA25D1ADC50062F775 /* MainPresenter.swift */,
-				527FBBF025D1C7500062F775 /* NetworkManager.swift */,
-				5281BD1625CC86F400F65061 /* CustomTableViewCell.swift */,
-				526F6A8A25CDA64900B6D6D3 /* DetailTableViewController.swift */,
-				5205BF4A25D448BA001B1ADA /* DetailPresenter.swift */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		5281BD1C25CC994800F65061 /* Model */ = {
@@ -208,7 +232,7 @@
 				5205BF4B25D448BA001B1ADA /* DetailPresenter.swift in Sources */,
 				5281BD0225CC7F8700F65061 /* User_Info.xcdatamodeld in Sources */,
 				527FBBEB25D1ADC50062F775 /* MainPresenter.swift in Sources */,
-				5281BD1725CC86F400F65061 /* CustomTableViewCell.swift in Sources */,
+				5281BD1725CC86F400F65061 /* MainTableViewCell.swift in Sources */,
 				5281BCFC25CC7F8700F65061 /* MainViewController.swift in Sources */,
 				5281BCF825CC7F8700F65061 /* AppDelegate.swift in Sources */,
 				5281BCFA25CC7F8700F65061 /* SceneDelegate.swift in Sources */,

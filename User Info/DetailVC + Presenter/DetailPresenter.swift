@@ -24,5 +24,4 @@ class DetailPresenter: DetailViewPresenterProtocol {
         self.view = view
         self.networkManager = networkManager
     }
-
 }

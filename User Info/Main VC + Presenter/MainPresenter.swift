@@ -25,7 +25,7 @@ class MainPresenter: MainViewPresenterProtocol {
     private var networkManager: NetworkManager
     var usersURL: [UserURL]?
     var user: User?
-    var users: [User]?
+    var users = [User]()
     
     required init(view: MainViewProtocol, networkManager: NetworkManager) {
         self.view = view
@@ -59,9 +59,14 @@ class MainPresenter: MainViewPresenterProtocol {
                     print(error.localizedDescription)
                 case .success(let user):
                     self.user = user
-                    self.users?.append(user)
                 }
             }
+        }
+    }
+    
+    func getImage(imageURL: String, completion: @escaping (UIImage) -> ()) {
+        networkManager.getImage(stringUrl: imageURL) { (image) in
+            completion(image)
         }
     }
 }
