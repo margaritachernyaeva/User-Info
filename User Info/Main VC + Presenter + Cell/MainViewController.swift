@@ -11,9 +11,6 @@ class MainViewController: UIViewController {
 
     private var presenter: MainPresenter?
     private var networkManager: NetworkManager!
-    var user: User?
-    var userURL = [UserURL]()
-    var users: [User]?
     @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -64,7 +61,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 132
+        return 154
     }
 }
 

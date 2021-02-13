@@ -15,7 +15,10 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    
+    // this var used when transfering data to DetailVC
     var user: User?
+    
     //prepape cells to be reused
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -45,7 +48,7 @@ class MainTableViewCell: UITableViewCell {
                 } else {
                     self.followingLabel.text = " "
                 }
-                // Changing date size to become readable
+                // Changing date size to make it readable
                 self.dateLabel.text = String((userInfo.created_at ?? "").dropLast(10))
                 // downloading images
                 DispatchQueue.global(qos: .background).async {
