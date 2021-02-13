@@ -15,7 +15,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
+    var user: User?
     //prepape cells to be reused
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -30,6 +30,7 @@ class MainTableViewCell: UITableViewCell {
     func configure(stringURL: String, presenter: MainPresenter) {
         // Info
         presenter.getUser(userURL: stringURL) { userInfo in
+            self.user = userInfo
             guard let userInfo = userInfo else { return }
             DispatchQueue.main.async {
                 self.nameLabel.text = userInfo.name ?? " "

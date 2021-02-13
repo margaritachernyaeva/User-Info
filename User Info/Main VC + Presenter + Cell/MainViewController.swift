@@ -38,13 +38,10 @@ class MainViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            guard let detailVC = segue.destination as? DetailTableViewController else { return }
-            guard let indexPath = tableView.indexPathForSelectedRow else { return }
-            guard let url = presenter?.usersURL?[indexPath.row].url else { return }
-            presenter?.getUser(userURL: url) { userInfo in
-                detailVC.userInfo = userInfo
-            }
+        if segue.identifier == "showDetail",
+           let detailVC = segue.destination as? DetailTableViewController,
+           let userInfo = (sender as? MainTableViewCell)?.user {
+            detailVC.userInfo = userInfo
         }
     }
 }
@@ -58,7 +55,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
         guard let presenter = presenter else { return UITableViewCell() }
         guard let stringURL = presenter.usersURL?[indexPath.row].url else { return cell }
