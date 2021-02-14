@@ -11,6 +11,8 @@ class NetworkManager {
     
     var url = "https://api.github.com/users"
     
+    //getURL & getUser functions look similar. I should use generics to integrate them into one func, but I had some problems with it, so I leave it for a while
+    
     func getURL(completion: @escaping (Result<[UserURL], Error>) ->()) {
         guard let url = URL(string: url) else { return }
         URLSession.shared.dataTask(with: url) {  data, _, error in
