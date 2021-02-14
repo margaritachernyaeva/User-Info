@@ -7,29 +7,21 @@
 
 import UIKit
 
-protocol MainViewProtocol: AnyObject {
+protocol MainViewProtocol {
     func success()
     func failure(error: Error)
-}
-
-protocol MainViewPresenterProtocol {
-    init(view: MainViewProtocol, networkManager: NetworkManager)
-    var usersURL: [UserURL]? { get set }
-    var user: User? { get set }
     func getURL()
 }
 
-class MainPresenter: MainViewPresenterProtocol {
+class MainPresenter {
     
     private var view: MainViewProtocol
     private var networkManager: NetworkManager
     var usersURL: [UserURL]?
-    var user: User?
     
     required init(view: MainViewProtocol, networkManager: NetworkManager) {
         self.view = view
         self.networkManager = networkManager
-        getURL()
     }
     
     func getURL() {

@@ -16,7 +16,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    // this var used when transfering data to DetailVC
+    // this var used for transfering data to DetailVC
     var user: User?
     
     //prepape cells to be reused
@@ -65,4 +65,20 @@ class MainTableViewCell: UITableViewCell {
         self.avatar.layer.cornerRadius = self.avatar.frame.width / 2
         self.avatar.clipsToBounds = true
     }
+}
+
+extension MainTableViewCell: MainViewProtocol {
+    func success() {
+        <#code#>
+    }
+    
+    func failure(error: Error) {
+        <#code#>
+    }
+    
+    func getURL() {
+        <#code#>
+    }
+    
+    
 }

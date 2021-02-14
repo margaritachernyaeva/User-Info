@@ -30,7 +30,7 @@ class MainViewController: UIViewController {
         presenter = MainPresenter(view: self, networkManager: networkManager)
     }
     
-    private func getURL() {
+    internal func getURL() {
         presenter?.getURL() 
     }
     
@@ -76,6 +76,7 @@ extension MainViewController: MainViewProtocol {
     func success() {
       tableView.reloadData()
     }
+
 }
 
 

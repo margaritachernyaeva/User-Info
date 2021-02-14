@@ -24,7 +24,6 @@ class NetworkManager {
             do {
                 result = try JSONDecoder().decode([UserURL].self, from: data)
             } catch {
-                print(error.localizedDescription)
                 completion(.failure(error))
             }
             guard let json = result else { return }
