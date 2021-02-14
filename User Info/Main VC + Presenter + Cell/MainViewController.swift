@@ -57,6 +57,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
            let stringURL = presenter.usersURL?[indexPath.row].url {
                 cell.prepareForReuse()
                 cell.configure(stringURL: stringURL, presenter: presenter)
+                cell.selectionStyle = .none
                 return cell
         }
         return MainTableViewCell()
