@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+// This class doesn't match to MVP Pattern. I couldn't do anything with it yet. But I tried
 class MainTableViewCell: UITableViewCell {
     
     @IBOutlet weak var avatar: UIImageView!
@@ -16,10 +16,10 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    // this var used for transfering data to DetailVC
+    // this var is used for transfering data to DetailVC
     var user: User?
     
-    //prepape cells to be reused
+    //prepaping cells to be reused
     override func prepareForReuse() {
         super.prepareForReuse()
         avatar.image = nil
@@ -48,8 +48,10 @@ class MainTableViewCell: UITableViewCell {
                 } else {
                     self.followingLabel.text = " "
                 }
+                
                 // Changing date size to make it readable
                 self.dateLabel.text = String((userInfo.created_at ?? "").dropLast(10))
+                
                 // downloading images
                 DispatchQueue.global(qos: .background).async {
                     guard let imageURL = userInfo.avatar_url else { return }
@@ -61,24 +63,9 @@ class MainTableViewCell: UITableViewCell {
                 }
             }
         }
+        
         //some settings
         self.avatar.layer.cornerRadius = self.avatar.frame.width / 2
         self.avatar.clipsToBounds = true
     }
-}
-
-extension MainTableViewCell: MainViewProtocol {
-    func success() {
-        <#code#>
-    }
-    
-    func failure(error: Error) {
-        <#code#>
-    }
-    
-    func getURL() {
-        <#code#>
-    }
-    
-    
 }

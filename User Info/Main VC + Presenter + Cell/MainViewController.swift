@@ -10,7 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
 
     private var presenter: MainPresenter?
-    private var networkManager: NetworkManager!
+    private var networkManager = NetworkManager()
     @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -26,10 +26,10 @@ class MainViewController: UIViewController {
     }
 
     private func initialize() {
-        networkManager = NetworkManager()
         presenter = MainPresenter(view: self, networkManager: networkManager)
     }
     
+    // here we receive an array of user's urls at Presenter
     internal func getURL() {
         presenter?.getURL() 
     }
@@ -52,12 +52,14 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MainTableViewCell else { return UITableViewCell() }
-        guard let presenter = presenter else { return UITableViewCell() }
-        guard let stringURL = presenter.usersURL?[indexPath.row].url else { return cell }
-        cell.prepareForReuse()
-        cell.configure(stringURL: stringURL, presenter: presenter)
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MainTableViewCell,
+           let presenter = presenter,
+           let stringURL = presenter.usersURL?[indexPath.row].url {
+                cell.prepareForReuse()
+                cell.configure(stringURL: stringURL, presenter: presenter)
+                return cell
+        }
+        return MainTableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

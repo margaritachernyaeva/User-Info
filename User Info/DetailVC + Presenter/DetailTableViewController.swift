@@ -9,6 +9,7 @@ import UIKit
 
 class DetailTableViewController: UITableViewController {
     
+    var presenter: DetailPresenter?
     var userInfo: User?
 
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -23,15 +24,35 @@ class DetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialize()
         setupUser()
     }
     
+    private func initialize() {
+        presenter = DetailPresenter(view: self, user: userInfo)
+    }
+    
     private func setupUser() {
-        guard let userInfo = userInfo else { return }
+        presenter?.setupUser()
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+}
+
+//MARK: - DetailViewProtocol
+
+extension DetailTableViewController: DetailViewProtocol {
+    
+    func setupUser(user: User?) {
+        guard let userInfo = user else { return }
         nameLabel.text = userInfo.name ?? " "
         emailLabel.text = userInfo.email ?? " "
-        followersCountLabel.text = userInfo.followers == nil ? " " : String(userInfo.followers ?? 0)
-        followingCountLabel.text = userInfo.following == nil ? " " : String(userInfo.following ?? 0)
+        followersCountLabel.text = userInfo.followers == nil ? " "
+            : String(userInfo.followers ?? 0)
+        followingCountLabel.text = userInfo.following == nil ? " "
+            : String(userInfo.following ?? 0)
         locationLabel.text = userInfo.location ?? " "
         companyLabel.text = userInfo.company ?? " "
         publicRepositoriesCountLabel.text = userInfo.public_repos == nil ? " " : String(userInfo.public_repos ?? 0)
@@ -41,17 +62,8 @@ class DetailTableViewController: UITableViewController {
             avatarImageView.image = UIImage(data: imageData)
         } else {
             avatarImageView.image = #imageLiteral(resourceName: "default_photo")
-        }
+                }
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.clipsToBounds = true
     }
-
-    // MARK: - Table view data source
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
-    }
-    
-
-    
 }

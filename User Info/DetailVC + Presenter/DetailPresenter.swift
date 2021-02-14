@@ -6,22 +6,22 @@
 //
 
 import Foundation
-protocol DetailViewProtocol: AnyObject {
-    func success()
-    func failure(error: Error)
+
+protocol DetailViewProtocol {
+    func setupUser(user: User?)
 }
 
-protocol DetailViewPresenterProtocol {
-    init(view: DetailViewProtocol, networkManager: NetworkManager)
-    var user: User? { get set }
-}
-
-class DetailPresenter: DetailViewPresenterProtocol {
+class DetailPresenter {
+    
     private var view: DetailViewProtocol?
-    private var networkManager: NetworkManager?
     var user: User?
-    required init(view: DetailViewProtocol, networkManager: NetworkManager) {
+    
+    required init(view: DetailViewProtocol?, user: User?) {
         self.view = view
-        self.networkManager = networkManager
+        self.user = user
+    }
+    
+    func setupUser() {
+        self.view?.setupUser(user: user)
     }
 }

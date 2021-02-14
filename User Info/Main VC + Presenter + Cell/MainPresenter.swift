@@ -10,7 +10,6 @@ import UIKit
 protocol MainViewProtocol {
     func success()
     func failure(error: Error)
-    func getURL()
 }
 
 class MainPresenter {
