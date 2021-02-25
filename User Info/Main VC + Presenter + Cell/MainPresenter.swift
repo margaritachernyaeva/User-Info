@@ -18,10 +18,13 @@ class MainPresenter {
     }
     
     func getURL() {
-        networkManager.getURL(completion: {  [weak self] result in
+        let view = self.view
+        networkManager.getURL(completion: { [weak self] result in
+            guard let self = self else {
+                view.failure(error: NetworkError.unknownError)
+                return
+            }
             DispatchQueue.main.async {
-                guard let self = self else {
-                    return }
                 switch result {
                 case .failure(let error):
                     self.view.failure(error: error)
@@ -35,9 +38,13 @@ class MainPresenter {
     }
     
     func getUser(userURL: String, completion: @escaping (User?) -> ()) {
+        let view = self.view
         networkManager.getUser(userURL: userURL) { [weak self] result in
+            guard let self = self else {
+                view.failure(error: NetworkError.unknownError)
+                return
+            }
             DispatchQueue.main.async {
-                guard let self = self else { return }
                 switch result {
                 case .failure(let error):
                     self.view.failure(error: error)

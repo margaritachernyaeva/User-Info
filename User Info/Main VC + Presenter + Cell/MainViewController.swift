@@ -29,7 +29,6 @@ class MainViewController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 154
-        
     }
 
     private func initialize() {
@@ -68,10 +67,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return MainTableViewCell()
     }
-//    
+    
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let detailVC = DetailTableViewController()
+//        if let detailVC = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailTableViewController {
+//            let user = presenter?.usersURL?[indexPath.row]
 //        self.navigationController?.pushViewController(detailVC, animated: true)
+//        }
 //    }
 }
 
