@@ -7,6 +7,11 @@
 
 import UIKit
 
+
+protocol DetailViewProtocol {
+    func setupUser(user: User?)
+}
+
 class DetailTableViewController: UITableViewController {
     
     var presenter: DetailPresenter?

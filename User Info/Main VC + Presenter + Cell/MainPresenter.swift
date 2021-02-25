@@ -7,20 +7,14 @@
 
 import UIKit
 
-protocol MainViewProtocol {
-    func success()
-    func failure(error: Error)
-}
-
 class MainPresenter {
     
     private var view: MainViewProtocol
-    private var networkManager: NetworkManager
+    private var networkManager = NetworkManager()
     var usersURL: [UserURL]?
     
-    required init(view: MainViewProtocol, networkManager: NetworkManager) {
+    required init(view: MainViewProtocol) {
         self.view = view
-        self.networkManager = networkManager
     }
     
     func getURL() {

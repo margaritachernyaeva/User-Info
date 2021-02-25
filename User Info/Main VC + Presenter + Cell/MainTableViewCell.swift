@@ -32,7 +32,9 @@ class MainTableViewCell: UITableViewCell {
     
     func configure(stringURL: String, presenter: MainPresenter) {
         // Info
-        presenter.getUser(userURL: stringURL) { userInfo in
+        presenter.getUser(userURL: stringURL) { [weak self] userInfo in
+            // TO DO 
+            guard let self = self else { return }
             self.user = userInfo
             guard let userInfo = userInfo else { return }
             DispatchQueue.main.async {

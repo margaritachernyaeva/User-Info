@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol DetailViewProtocol {
-    func setupUser(user: User?)
-}
-
 class DetailPresenter {
     
     private var view: DetailViewProtocol?

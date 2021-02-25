@@ -7,26 +7,33 @@
 
 import UIKit
 
+protocol MainViewProtocol {
+    func success()
+    func failure(error: Error)
+}
+
 class MainViewController: UIViewController {
 
     private var presenter: MainPresenter?
-    private var networkManager = NetworkManager()
     @IBOutlet private weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
         initialize()
         getURL()
+        setupTableView()
     }
     
    private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 154
+        
     }
 
     private func initialize() {
-        presenter = MainPresenter(view: self, networkManager: networkManager)
+        presenter = MainPresenter(view: self)
     }
     
     // here we receive an array of user's urls at Presenter
@@ -55,17 +62,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MainTableViewCell,
            let presenter = presenter,
            let stringURL = presenter.usersURL?[indexPath.row].url {
-                cell.prepareForReuse()
                 cell.configure(stringURL: stringURL, presenter: presenter)
                 cell.selectionStyle = .none
                 return cell
         }
         return MainTableViewCell()
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 154
-    }
+//    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let detailVC = DetailTableViewController()
+//        self.navigationController?.pushViewController(detailVC, animated: true)
+//    }
 }
 
 //MARK: - MainViewProtocol
