@@ -55,8 +55,8 @@ extension DetailTableViewController: DetailViewProtocol {
             : String(userInfo.following ?? 0)
         locationLabel.text = userInfo.location ?? " "
         companyLabel.text = userInfo.company ?? " "
-        publicRepositoriesCountLabel.text = userInfo.public_repos == nil ? " " : String(userInfo.public_repos ?? 0)
-        let date = String((userInfo.created_at ?? "").dropLast(10))
+        publicRepositoriesCountLabel.text = userInfo.publicRepos == nil ? " " : String(userInfo.publicRepos ?? 0)
+        let date = String((userInfo.createdAt ?? "").dropLast(10))
         dateOfCreation.text = "Account was created \(date)"
         if let imageData = userInfo.imageData {
             avatarImageView.image = UIImage(data: imageData)

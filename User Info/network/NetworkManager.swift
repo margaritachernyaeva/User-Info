@@ -9,7 +9,7 @@ import UIKit
 
 class NetworkManager {
     
-    var url = "https://api.github.com/users"
+    private var url = "https://api.github.com/users"
     
     //getURL & getUser functions look similar. I should use generics to integrate them into one func, but I had some problems with it, so I leave it for a while
     
@@ -25,11 +25,11 @@ class NetworkManager {
             var result: [UserURL]?
             do {
                 result = try JSONDecoder().decode([UserURL].self, from: data)
+                guard let json = result else { return }
+                completion(.success(json))
             } catch {
                 completion(.failure(error))
             }
-            guard let json = result else { return }
-            completion(.success(json))
         }.resume()
     }
     
@@ -45,20 +45,20 @@ class NetworkManager {
             var result: User?
             do {
                 result = try JSONDecoder().decode(User.self, from: data)
+                guard let json = result else { return }
+                completion(.success(json))
             } catch {
                 print(error.localizedDescription)
                 completion(.failure(error))
             }
-            guard let json = result else { return }
-            completion(.success(json))
         }.resume()
     }
     
-    func getImage(stringUrl: String, completion: @escaping (UIImage) ->()) {
-        guard let url = URL(string: stringUrl) else { return }
+    func getImage(stringUrl: String) -> UIImage? {
+        guard let url = URL(string: stringUrl) else { return nil }
         let data = try? Data(contentsOf: url)
-        guard let imageData = data else { return }
-        guard let image = UIImage(data: imageData) else { return }
-        completion(image)
+        guard let imageData = data else { return nil }
+        guard let image = UIImage(data: imageData) else { return nil }
+        return image
     }
 }

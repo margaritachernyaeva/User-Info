@@ -26,7 +26,8 @@ class MainPresenter {
     func getURL() {
         networkManager.getURL(completion: {  [weak self] result in
             DispatchQueue.main.async {
-                guard let self = self else { return }
+                guard let self = self else {
+                    return }
                 switch result {
                 case .failure(let error):
                     self.view.failure(error: error)
@@ -54,9 +55,8 @@ class MainPresenter {
         }
     }
     
-    func getImage(imageURL: String, completion: @escaping (UIImage) -> ()) {
-        networkManager.getImage(stringUrl: imageURL) { (image) in
-            completion(image)
-        }
+    func getImage(imageURL: String) -> UIImage? {
+        let image = networkManager.getImage(stringUrl: imageURL)
+        return image
     }
 }

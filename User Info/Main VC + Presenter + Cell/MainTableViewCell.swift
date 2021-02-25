@@ -50,15 +50,14 @@ class MainTableViewCell: UITableViewCell {
                 }
                 
                 // Changing date size to make it readable
-                self.dateLabel.text = String((userInfo.created_at ?? "").dropLast(10))
+                self.dateLabel.text = String((userInfo.createdAt ?? "").dropLast(10))
                 
                 // downloading images
                 DispatchQueue.global(qos: .background).async {
-                    guard let imageURL = userInfo.avatar_url else { return }
-                    presenter.getImage(imageURL: imageURL) { image in
-                        DispatchQueue.main.async {
-                            self.avatar.image = image
-                        }
+                    guard let imageURL = userInfo.avatarURL else { return }
+                    let image = presenter.getImage(imageURL: imageURL)
+                    DispatchQueue.main.async {
+                        self.avatar.image = image
                     }
                 }
             }

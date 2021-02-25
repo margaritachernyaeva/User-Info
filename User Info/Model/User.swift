@@ -8,21 +8,33 @@
 import Foundation
 
 struct User: Codable {
-    let avatar_url : String?
+    let avatarURL : String?
     let name : String?
     let email : String?
     let followers : Int?
     let following : Int?
-    let created_at : String?
+    let createdAt : String?
     let company: String?
     let location: String?
-    let public_repos: Int?
-}
+    let publicRepos: Int?
 
+    enum CodingKeys: String, CodingKey {
+        case avatarURL = "avatar_url"
+        case createdAt = "created_at"
+        case publicRepos = "public_repos"
+        case name
+        case email
+        case followers
+        case following
+        case company
+        case location
+    }
+}
+    
 extension User {
     // this helps to transfer image from MainVC to DetailVC
     var imageData: Data? {
-        guard let stringURL = avatar_url else { return nil }
+        guard let stringURL = avatarURL else { return nil }
         if let url = URL(string: stringURL) {
             return try? Data(contentsOf: url)
         }
