@@ -30,15 +30,11 @@ class DetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
-        setupUser()
+        setupUser(user: userInfo)
     }
     
     private func initialize() {
         presenter = DetailPresenter(view: self, user: userInfo)
-    }
-    
-    private func setupUser() {
-        presenter?.setupUser()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

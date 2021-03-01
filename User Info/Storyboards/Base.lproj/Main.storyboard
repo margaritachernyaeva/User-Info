@@ -11,7 +11,7 @@
         <!--User Info-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="Detail" id="BYZ-38-t0r" customClass="MainViewController" customModule="User_Info" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="User_Info" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,7 +142,6 @@
                                             <outlet property="followersLabel" destination="L6V-sW-lHg" id="u9b-KP-6EM"/>
                                             <outlet property="followingLabel" destination="WPP-Cb-1MP" id="tFz-pB-ylV"/>
                                             <outlet property="nameLabel" destination="p9B-bp-QXC" id="XOz-Hk-dtv"/>
-                                            <segue destination="8R0-XY-r2K" kind="show" identifier="showDetail" id="a93-oK-o3n"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -169,9 +168,9 @@
         <!--Detail Table View Controller-->
         <scene sceneID="eNU-dC-h96">
             <objects>
-                <tableViewController id="8R0-XY-r2K" customClass="DetailTableViewController" customModule="User_Info" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Detail" id="8R0-XY-r2K" customClass="DetailTableViewController" customModule="User_Info" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleAspectFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zla-23-JB3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="separatorColor" red="0.33519902280000002" green="0.8745241117" blue="0.71880973889999999" alpha="0.67251712330000002" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="22" minY="0.0" maxX="22" maxY="0.0"/>

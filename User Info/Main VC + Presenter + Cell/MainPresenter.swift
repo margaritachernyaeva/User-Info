@@ -98,4 +98,12 @@ class MainPresenter {
         let image = networkManager.getImage(stringUrl: imageURL)
         return image
     }
+    
+    func getDetailInfo(index: Int) -> User? {
+        return users[index].userInfo
+    }
+    
+    func getDetailAvatar(index: Int) -> UIImage? {
+        return users[index].image
+    }
 }

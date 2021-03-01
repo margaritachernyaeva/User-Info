@@ -5,12 +5,13 @@
 //  Created by Маргарита Черняева on 2/10/21.
 //
 
-import Foundation
+import UIKit
 
 class DetailPresenter {
     
     private var view: DetailViewProtocol?
     var user: User?
+    var avatar: UIImage?
     
     required init(view: DetailViewProtocol?, user: User?) {
         self.view = view

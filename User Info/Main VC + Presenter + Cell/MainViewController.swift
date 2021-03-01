@@ -35,19 +35,6 @@ class MainViewController: UIViewController {
         presenter = MainPresenter(view: self)
         presenter?.getURLs()
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "showDetail",
-//            let detailVC = segue.destination as? DetailTableViewController,
-//            let cell = sender as? MainTableViewCell,
-//            let indexPath = tableView.indexPath(for: cell) {
-//            guard let stringURL = presenter?.usersURL?[indexPath.row].url else { return }
-//            presenter?.getUser(userURL: stringURL) { (user) in
-//                guard let user = user else { return }
-//                detailVC.userInfo = user
-//            }
-//        }
-    }
 }
 
 //MARK: - TableViewDelegate & DataSource
@@ -67,12 +54,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let detailVC = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailTableViewController {
-//            let user = presenter?.usersURL?[indexPath.row]
-//        self.navigationController?.pushViewController(detailVC, animated: true)
-//        }
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let detailVC = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailTableViewController {
+                detailVC.userInfo = self.presenter?.getUser(index: indexPath.row)
+                self.navigationController?.pushViewController(detailVC, animated: true)
+        }
+    }
 }
 
 //MARK: - MainViewProtocol
