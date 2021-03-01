@@ -10,6 +10,7 @@ import UIKit
 protocol MainViewProtocol {
     func success()
     func failure(error: Error)
+    func updateCell(index: Int)
 }
 
 class MainViewController: UIViewController {
@@ -20,7 +21,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
-        getURL()
         setupTableView()
     }
     
@@ -33,19 +33,20 @@ class MainViewController: UIViewController {
 
     private func initialize() {
         presenter = MainPresenter(view: self)
-    }
-    
-    // here we receive an array of user's urls at Presenter
-    internal func getURL() {
-        presenter?.getURL() 
+        presenter?.getURLs()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail",
-           let detailVC = segue.destination as? DetailTableViewController,
-           let userInfo = (sender as? MainTableViewCell)?.user {
-            detailVC.userInfo = userInfo
-        }
+//        if segue.identifier == "showDetail",
+//            let detailVC = segue.destination as? DetailTableViewController,
+//            let cell = sender as? MainTableViewCell,
+//            let indexPath = tableView.indexPath(for: cell) {
+//            guard let stringURL = presenter?.usersURL?[indexPath.row].url else { return }
+//            presenter?.getUser(userURL: stringURL) { (user) in
+//                guard let user = user else { return }
+//                detailVC.userInfo = user
+//            }
+//        }
     }
 }
 
@@ -54,18 +55,16 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.usersURL?.count ?? 0
+        return presenter?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MainTableViewCell,
-           let presenter = presenter,
-           let stringURL = presenter.usersURL?[indexPath.row].url {
-                cell.configure(stringURL: stringURL, presenter: presenter)
-                cell.selectionStyle = .none
-                return cell
-        }
-        return MainTableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MainTableViewCell else { return MainTableViewCell() }
+        let user = presenter?.getUser(index: indexPath.row)
+        let avatar = self.presenter?.getAvatar(index: indexPath.row)
+        cell.configure(userInfo: user, avatarImage: avatar)
+        cell.selectionStyle = .none
+        return cell
     }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -80,12 +79,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController: MainViewProtocol {
     
+    func updateCell(index: Int) {
+        tableView.beginUpdates()
+        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: UITableView.RowAnimation.automatic)
+        tableView.endUpdates()
+    }
+    
     func failure(error: Error) {
-       showAlert(withTitle: "Error", message: error.localizedDescription)
+        showAlert(withTitle: "Error", message: error.localizedDescription)
     }
     
     func success() {
-      tableView.reloadData()
+        tableView.reloadData()
     }
 }
 
