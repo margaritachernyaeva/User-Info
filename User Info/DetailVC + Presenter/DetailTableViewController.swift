@@ -17,15 +17,15 @@ class DetailTableViewController: UITableViewController {
     var presenter: DetailPresenter?
     var userInfo: User?
 
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var followersCountLabel: UILabel!
-    @IBOutlet weak var followingCountLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel!
-    @IBOutlet weak var companyLabel: UILabel!
-    @IBOutlet weak var publicRepositoriesCountLabel: UILabel!
-    @IBOutlet weak var dateOfCreation: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var emailLabel: UILabel!
+    @IBOutlet private weak var followersCountLabel: UILabel!
+    @IBOutlet private weak var followingCountLabel: UILabel!
+    @IBOutlet private weak var locationLabel: UILabel!
+    @IBOutlet private weak var companyLabel: UILabel!
+    @IBOutlet private weak var publicRepositoriesCountLabel: UILabel!
+    @IBOutlet private weak var dateOfCreation: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()

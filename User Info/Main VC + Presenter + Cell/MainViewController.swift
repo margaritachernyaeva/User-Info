@@ -55,9 +55,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let detailVC = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailTableViewController {
-                detailVC.userInfo = self.presenter?.getUser(index: indexPath.row)
-                self.navigationController?.pushViewController(detailVC, animated: true)
+        if let detailVC = storyboard?.instantiateViewController(withIdentifier: "Detail") as?         DetailTableViewController {
+            detailVC.userInfo = self.presenter?.getUser(index: indexPath.row)
+            self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
 }

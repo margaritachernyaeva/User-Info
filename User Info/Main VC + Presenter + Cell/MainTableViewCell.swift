@@ -9,12 +9,12 @@ import UIKit
 
 class MainTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var avatar: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var followersLabel: UILabel!
-    @IBOutlet weak var followingLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet private weak var avatar: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var emailLabel: UILabel!
+    @IBOutlet private weak var followersLabel: UILabel!
+    @IBOutlet private weak var followingLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
     
     func configure(userInfo: User?, avatarImage: UIImage?) {
         nameLabel.text = userInfo?.name ?? " "

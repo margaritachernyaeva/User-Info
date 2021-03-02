@@ -7,18 +7,18 @@
 
 import UIKit
 
+//TODO: -
+// This class must contain info about user and represent infomantion to DetailVC. In process
 class DetailPresenter {
-    
+
     private var view: DetailViewProtocol?
-    var user: User?
-    var avatar: UIImage?
+
     
-    required init(view: DetailViewProtocol?, user: User?) {
+    required init(view: DetailViewProtocol?) {
         self.view = view
-        self.user = user
     }
     
     func setupUser() {
-        self.view?.setupUser(user: user)
+//        self.view?.setupUser(user: user)
     }
 }
